@@ -12,7 +12,7 @@ PeerOrgs:
   # Organization1 - Sink Fixers
   # ---------------------------------------------------------------------------
   - Name: Sink_Fixers  #c
-    Domain: org.autocon.net #c
+    Domain: SFX.autocon.net #c
     EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs"
@@ -32,7 +32,7 @@ PeerOrgs:
     #   - Hostname: bar
     #   - Hostname: baz
     Specs:
-      -Hostname: SFX #c
+      - Hostname: SFX #c
     # ---------------------------------------------------------------------------
     # "Template"
     # ---------------------------------------------------------------------------

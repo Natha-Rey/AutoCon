@@ -11,7 +11,7 @@ PeerOrgs:
   # Organization2 - Justin Plumberlake
   # ---------------------------------------------------------------------------
   - Name: Justin Plumberlake #c
-    Domain: org.autocon.net #c (same domainname for both?)
+    Domain: JPL.autocon.net #c (same domainname for both?)
     EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs"
@@ -31,7 +31,7 @@ PeerOrgs:
     #   - Hostname: bar
     #   - Hostname: baz
     Specs:
-      -Hostname: JPL #c
+      - Hostname: JPL #c
     # ---------------------------------------------------------------------------
     # "Template"
     # ---------------------------------------------------------------------------
