@@ -48,15 +48,15 @@ class Job extends State {
     }
 
     isPosted(){
-        return this.currentState === JobStatus.Posted.statusName;
+        return this.currentState === JobStatus.Posted.name;
     }
 
     isProcessing(){
-        return this.currentState === JobStatus.Processing.statusName;
+        return this.currentState === JobStatus.Processing.name;
     }
 
     isDone(){
-        return this.currentState === JobStatus.Done.statusName;
+        return this.currentState === JobStatus.Done.name;
     }
 
     static fromBuffer(buffer){

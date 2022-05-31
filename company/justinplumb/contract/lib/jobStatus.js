@@ -10,8 +10,8 @@ class JobStatus {
     static Processing = new JobStatus("Processing");
     static Done = new JobStatus("Done");
 
-    constructor(statusName){
-        this.statusName = statusName;
+    constructor(name){
+        this.name = name;
     }
 }
 
