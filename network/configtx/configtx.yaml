@@ -47,7 +47,7 @@ Organizations:
     - &Org1
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: SFX_MSP #c
+        Name: SfxMSP #c
 
         # ID to load the MSP definition as
         ID: Org1MSP
@@ -70,11 +70,15 @@ Organizations:
             Endorsement:
                 Type: Signature
                 Rule: "OR('Org1MSP.peer')"
+        
+        AnchorPeers:
+            - Host : peer0.SFX.autocon.net
+              Port : 7051       
 
     - &Org2
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: JPL_MSP       #c
+        Name: JplMSP       #c
 
         # ID to load the MSP definition as
         ID: Org2MSP 
@@ -98,6 +102,9 @@ Organizations:
                 Type: Signature
                 Rule: "OR('Org2MSP.peer')"
 
+        AnchorPeers:
+            - Host : peer0.JPL.autocon.net
+              Port : 9051    
 ################################################################################
 #
 #   SECTION: Capabilities
@@ -213,7 +220,7 @@ Orderer: &OrdererDefaults
 
     EtcdRaft:
         Consenters:
-        - Host: orderer.autcon.net
+        - Host: orderer.autocon.net
           Port: 7050
           ClientTLSCert: ../organizations/ordererOrganizations/autocon.net/orderers/orderer.autocon.net/tls/server.crt
           ServerTLSCert: ../organizations/ordererOrganizations/autocon.net/orderers/orderer.autocon.net/tls/server.crt
@@ -238,7 +245,7 @@ Orderer: &OrdererDefaults
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
-    Organizations:   #?
+    Organizations:   
 
     # Policies defines the set of policies at this level of the config tree
     # For Orderer policies, their canonical path is
@@ -291,7 +298,7 @@ Channel: &ChannelDefaults
     Capabilities:
         <<: *ChannelCapabilities
 
-################################################################################
+############################################################################sor####
 #
 #   Profile
 #
