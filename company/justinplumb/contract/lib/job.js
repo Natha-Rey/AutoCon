@@ -72,7 +72,7 @@ class Job extends State {
     }
 
     //Creates a job object
-    static createInstance(initiator, jobID, jobDescription, location, contactPhoneNumber, totalPrice, cutoutPercentage){
+    static createJob(initiator, jobID, jobDescription, location, contactPhoneNumber, totalPrice, cutoutPercentage){
         return new Job({ initiator, jobID, jobDescription, location, contactPhoneNumber, totalPrice, cutoutPercentage});
     }
 
