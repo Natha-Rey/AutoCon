@@ -31,20 +31,28 @@ class Job extends State {
         this.owner = newOwner;
     }
 
+    getOwnerMSP(){
+        return this.mspid;
+    }
+
+    setOwnerMSP(mspid){
+        this.mspid = mspid;
+    }
+
     //Encapsulate job states value
     //When the job has been created and posted to the network
     setPosted(){
-        this.currentState = JobStatus.Posted;
+        this.currentState = JobStatus.Posted.name;
     }
 
     //When the job has been picked for another company and it's working on it
     setProcessing(){
-        this.currentState = JobStatus.Processing;
+        this.currentState = JobStatus.Processing.name;
     }
 
     //When the job has been completed by the company
     setDone(){
-        this.currentState = JobStatus.Done;
+        this.currentState = JobStatus.Done.name;
     }
 
     isPosted(){
@@ -72,8 +80,8 @@ class Job extends State {
     }
 
     //Creates a job object
-    static createJob(initiator, jobID, jobDescription, location, contactPhoneNumber, totalPrice, cutoutPercentage){
-        return new Job({ initiator, jobID, jobDescription, location, contactPhoneNumber, totalPrice, cutoutPercentage});
+    static createJob(initiator, jobID, jobDescription, location, totalPrice, cutoutPercentage){
+        return new Job({ initiator, jobID, jobDescription, location, totalPrice, cutoutPercentage});
     }
 
     static getClass(){
