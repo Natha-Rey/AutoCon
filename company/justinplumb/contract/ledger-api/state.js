@@ -65,12 +65,12 @@ class State {
      * @return {json} json with the data to store
      */
     static deserialize(data, supportedClasses) {
-        let json = JSON.parse(data.toString());
-        let objClass = supportedClasses[json.class];
+        const json = JSON.parse(data.toString());
+        const objClass = supportedClasses[json.class];
         if (!objClass) {
             throw new Error(`Unknown class of ${json.class}`);
         }
-        let object = new (objClass)(json);
+        const object = new (objClass)(json);
 
         return object;
     }
@@ -82,8 +82,8 @@ class State {
      * @return {json} json with the data to store
      */
     static deserializeClass(data, objClass) {
-        let json = JSON.parse(data.toString());
-        let object = new (objClass)(json);
+        const json = JSON.parse(data.toString());
+        const object = new (objClass)(json);
         return object;
     }
 
