@@ -40,13 +40,13 @@ class JobContract extends Contract {
     */
     async postJob(ctx, initiator, jobID, jobDescription, location,  totalPrice, cutoutPercentage){
         // create an instance of the job
-        let job = Job.createJob(initiator, jobID, jobDescription, location, parseFloat(totalPrice), parseFloat(cutoutPercentage));
+        const job = Job.createJob(initiator, jobID, jobDescription, location, parseFloat(totalPrice), parseFloat(cutoutPercentage));
 
         //Set posted state by the smart contract
         job.setPosted();
 
         //save the owner's MSP
-        let mspid = ctx.clientIdentity.getMSPID();
+        const mspid = ctx.clientIdentity.getMSPID();
         job.setOwnerMSP(mspid);
 
         //The job will be owned by the company who posted it
@@ -60,9 +60,31 @@ class JobContract extends Contract {
 
     }
 
+    async updateJob(ctx, initiator, jobID, jobDescription, location,  totalPrice, cutoutPercentage){
+        const jobKey = Job.makeKey([initiator, jobID]);
+        const job = await ctx.jobList.getJob(jobKey);
+
+        if(job.isProcessing() || job.isDone()){
+            throw new Error('Job' + initiator + jobID + 'has not Posted state anymore. It cannot be modified.')
+        }
+
+        //Validate user invoking the fuction is the one that posted the job
+        if(job.getOwnerMSP() !== ctx.clientIdentity.getMSPID()) {
+            throw new Error('Job' + initiator + jobID + 'cannot be modified by' + ctx.clientIdentity.getMSPID() + 'as it is not the owning Organization');
+        }
+
+        job.setJobDescription(jobDescription);
+        job.setLocation(location);
+        job.setTotalPrice(totalPrice);
+        job.setCutoutPercentage(cutoutPercentage);
+
+        await ctx.jobList.updateJob(job);
+        return job;
+    }
+
     async fetchAllJobs(ctx){
-        let query = new QueryUtils(ctx, 'autocon.net');
-        let allJobs = await query.getAllAssets();
+        const query = new QueryUtils(ctx, 'autocon.net');
+        const allJobs = await query.getAllAssets();
         return JSON.stringify(allJobs);
     }
 }
