@@ -24,8 +24,12 @@ class JobContract extends Contract {
         return new JobContext();
     }
 
-    //This could perform any setup of the ledger if required.
+    /**
+     * This could perform any setup of the ledger if required.
+     * @param {Context} ctx transaction context
+     */
     //Not required for this prototype
+    // eslint-disable-next-line no-unused-vars
     async init(ctx){
         console.log("Contract Init");
     }
@@ -33,8 +37,26 @@ class JobContract extends Contract {
     /** 
      * Post a job
     */
-    async post(ctx, initiator, jobID, jobDescription, location, contactPhoneNumber, totalPrice, cutoutPercentage){
-        
+    async postJob(ctx, initiator, jobID, jobDescription, location,  totalPrice, cutoutPercentage){
+        // create an instance of the job
+        let job = Job.createJob(initiator, jobID, jobDescription, location, parseFloat(totalPrice), parseFloat(cutoutPercentage));
+
+        //Set posted state by the smart contract
+        job.setPosted();
+
+        //save the owner's MSP
+        let mspid = ctx.clientIdentity.getMSPID();
+        job.setOwnerMSP(mspid);
+
+        //The job will be owned by the company who posted it
+        job.setOwner(initiator);
+
+        //Add the job to the job list in the ledger world state
+        await ctx.jobList.addJob(job);
+
+        //Return a serialized job to the caller
+        return job;
+
     }
 }
 
