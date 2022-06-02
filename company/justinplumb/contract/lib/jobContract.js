@@ -5,6 +5,7 @@ const { Contract, Context } = require('fabric-contract-api');
 // AutoCon network classes
 const Job = require('./job.js');
 const JobList = require('./jobList.js');
+const QueryUtils = require('./queries.js');
 
 //Custom context to easily access list of all jobs
 class JobContext extends Context {
@@ -57,6 +58,12 @@ class JobContract extends Contract {
         //Return a serialized job to the caller
         return job;
 
+    }
+
+    async fetchAllJobs(ctx){
+        let query = new QueryUtils(ctx, 'autocon.net');
+        let allJobs = await query.getAllAssets();
+        return JSON.stringify(allJobs);
     }
 }
 
