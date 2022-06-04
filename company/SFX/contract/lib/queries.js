@@ -18,10 +18,19 @@ class QueryUtils {
 
         //range query returns an iterator over a set of keys. The startkey and endKey can be empty, wich implied an unbounded range.
         const iterator = await this.ctx.stub.getStateByRange(startKey, endKey);
-        for await (const res of iterator) {
-            allResults.push(res.value.toString('utf8'));
+        let result = await iterator.next();
+        while(!result.done){
+            const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
+            let record;
+            try {
+                record = JSON.parse(strValue);
+            } catch (err) {
+                console.log(err);
+                record = strValue;
+            }
+            allResults.push(record);
+            result = await iterator.next();
         }
-
         return allResults;
     }
 }
