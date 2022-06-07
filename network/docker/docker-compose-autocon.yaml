@@ -5,6 +5,7 @@
 
 version: '2'
 
+## Set the names of docker volumes for each peer and orderer
 volumes:
   orderer.autocon.net:
   peer0.SFX.autocon.net:
@@ -15,7 +16,7 @@ networks:
     name: autocon_test
 
 services:
-
+  ## Define Orderer certificate paths
   orderer.autocon.net:
     container_name: orderer.autocon.net
     image: hyperledger/fabric-orderer:latest
@@ -52,7 +53,7 @@ services:
       - 17050:17050
     networks:
       - test
-
+  ## Define peer specs
   peer0.SFX.autocon.net:
     container_name: peer0.SFX.autocon.net
     image: hyperledger/fabric-peer:latest
@@ -126,7 +127,7 @@ services:
       - 19051:19051
     networks:
       - test
-
+ ## Define CLI specs
   cli:
     container_name: cli
     image: hyperledger/fabric-tools:latest

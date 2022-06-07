@@ -1,0 +1,27 @@
+{
+  "name": "autocon",
+  "version": "1.0.0",
+  "description": "AutoCon Contract",
+  "main": "index.js",
+  "engines": {
+    "node": "^12.16.1",
+    "npm": "^6.4.1"
+  },
+  "scripts": {
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix ",
+    "start": "fabric-chaincode-node start",
+    "test": "echo Error: no test specified && exit 1"
+  },
+  "author": "Nathaly & Gazi",
+  "license": "ISC",
+  "dependencies": {
+    "fabric-contract-api": "^2.2.3",
+    "fabric-shim": "^2.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.6.2"
+  }
+}

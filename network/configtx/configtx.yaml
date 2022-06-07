@@ -229,7 +229,7 @@ Orderer: &OrdererDefaults
     BatchTimeout: 2s
 
     # Batch Size: Controls the number of messages batched into a block
-    BatchSize:   #?
+    BatchSize:  
 
         # Max Message Count: The maximum number of messages to permit in a batch
         MaxMessageCount: 10
